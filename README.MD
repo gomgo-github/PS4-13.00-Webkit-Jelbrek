@@ -44,7 +44,7 @@ The launcher currently routes firmware versions as follows:
 | 12.01 | `lapse` |
 | 12.02 | `lapse` |
 | 12.50 | `poops` |
-| 12.51+ | `poops` |
+| 12.52 | `poops` |
 | 13.00 | `poops` |
 
 The repository also contains offset data for additional firmware versions used by the underlying exploit infrastructure.
