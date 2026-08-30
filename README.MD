@@ -1,4 +1,4 @@
-# PS4 12.00 - 13.00 WebKit Exploit
+# PS4 11.50 - 13.00 WebKit Exploit
 
 ### **You can run this project on your PS4 from our website at [zrm.mariope.dev](zrm.mariope.dev)**
 
@@ -10,7 +10,7 @@
 >
 > I used [aidam19800](https://www.reddit.com/user/aidam19800/)'s extraction of the host source to build this, so special thanks for making the source code available to everyone else
 
-A browser-based PS4 jailbreak project targeting firmware versions in the **12.00–13.00** range made by [RawGame](https://www.facebook.com/RawGameStore/), edited to include the VueAfterFree cat images that some users like me missed
+A browser-based PS4 jailbreak project targeting firmware versions in the **11.50–13.00** range made by [RawGame](https://www.facebook.com/RawGameStore/), edited to include the VueAfterFree cat images that some users like me missed
 
 The project combines firmware-specific offsets, JavaScript exploitation chains, memory primitives, and kernel payloads into a self-contained web-based loader. It is designed to run from the PS4 browser and includes offline caching so the required assets can remain available after the initial load even offline.
 
@@ -40,6 +40,8 @@ The launcher currently routes firmware versions as follows:
 
 | Firmware | Chain |
 | --- | --- |
+| 11.50 | `lapse` |
+| 11.52 | `lapse` |
 | 12.00 | `lapse` |
 | 12.02 | `lapse` |
 | 12.50 | `poops` |
