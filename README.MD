@@ -47,8 +47,6 @@ The launcher currently routes firmware versions as follows:
 | 12.51+ | `poops` |
 | 13.00 | `poops` |
 
-Firmware versions between **12.03 and 12.49** are reported as unsupported by the launcher.
-
 The repository also contains offset data for additional firmware versions used by the underlying exploit infrastructure.
 
 ## Project Structure
