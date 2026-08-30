@@ -30,6 +30,10 @@ The project combines firmware-specific offsets, JavaScript exploitation chains, 
 - Configurable runtime parameters through URL query options.
 - Lightweight browser UI with status and diagnostic output.
 
+## Troubleshooting
+
+Most issues are usually solved by deleting Cookies and Website from your PlayStation, also, cat images will probably require Internet Access since those are not loaded into cache because there are 110 images and I'm not sure how unstable would it make this!
+
 ## Supported Firmware
 
 The launcher currently routes firmware versions as follows:
