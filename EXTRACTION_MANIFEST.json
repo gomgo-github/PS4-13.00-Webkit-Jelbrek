@@ -1,0 +1,152 @@
+{
+  "source_database": "ApplicationCache.db",
+  "cache_group": "https://raw-game.com/zrm/cache.appcache",
+  "resources_found": 20,
+  "unique_local_files": 18,
+  "files": [
+    {
+      "url": "https://raw-game.com/zrm/",
+      "local_path": "index.html",
+      "mime_type": "text/html",
+      "status_code": 200,
+      "size": 5347,
+      "cache_entry_type": 1
+    },
+    {
+      "url": "https://raw-game.com/zrm/cache.appcache",
+      "local_path": "cache.appcache",
+      "mime_type": "text/cache-manifest",
+      "status_code": 200,
+      "size": 1581,
+      "cache_entry_type": 2
+    },
+    {
+      "url": "https://raw-game.com/zrm/chain_lapse.js",
+      "local_path": "chain_lapse.js",
+      "mime_type": "text/javascript",
+      "status_code": 200,
+      "size": 211923,
+      "cache_entry_type": 4
+    },
+    {
+      "url": "https://raw-game.com/zrm/chain_poops.js",
+      "local_path": "chain_poops.js",
+      "mime_type": "text/javascript",
+      "status_code": 200,
+      "size": 136356,
+      "cache_entry_type": 4
+    },
+    {
+      "url": "https://raw-game.com/zrm/core.js",
+      "local_path": "core.js",
+      "mime_type": "text/javascript",
+      "status_code": 200,
+      "size": 43266,
+      "cache_entry_type": 4
+    },
+    {
+      "url": "https://raw-game.com/zrm/int64.js",
+      "local_path": "int64.js",
+      "mime_type": "text/javascript",
+      "status_code": 200,
+      "size": 2787,
+      "cache_entry_type": 4
+    },
+    {
+      "url": "https://raw-game.com/zrm/logo_raw.png",
+      "local_path": "logo_raw.png",
+      "mime_type": "image/png",
+      "status_code": 200,
+      "size": 14318,
+      "cache_entry_type": 4
+    },
+    {
+      "url": "https://raw-game.com/zrm/mem.js",
+      "local_path": "mem.js",
+      "mime_type": "text/javascript",
+      "status_code": 200,
+      "size": 28202,
+      "cache_entry_type": 4
+    },
+    {
+      "url": "https://raw-game.com/zrm/patches/1100.bin",
+      "local_path": "patches/1100.bin",
+      "mime_type": "application/octet-stream",
+      "status_code": 200,
+      "size": 632,
+      "cache_entry_type": 4
+    },
+    {
+      "url": "https://raw-game.com/zrm/patches/1150.bin",
+      "local_path": "patches/1150.bin",
+      "mime_type": "application/octet-stream",
+      "status_code": 200,
+      "size": 632,
+      "cache_entry_type": 4
+    },
+    {
+      "url": "https://raw-game.com/zrm/patches/1200.bin",
+      "local_path": "patches/1200.bin",
+      "mime_type": "application/octet-stream",
+      "status_code": 200,
+      "size": 632,
+      "cache_entry_type": 4
+    },
+    {
+      "url": "https://raw-game.com/zrm/patches/1250.bin",
+      "local_path": "patches/1250.bin",
+      "mime_type": "application/octet-stream",
+      "status_code": 200,
+      "size": 314,
+      "cache_entry_type": 4
+    },
+    {
+      "url": "https://raw-game.com/zrm/patches/1300.bin",
+      "local_path": "patches/1300.bin",
+      "mime_type": "application/octet-stream",
+      "status_code": 200,
+      "size": 314,
+      "cache_entry_type": 4
+    },
+    {
+      "url": "https://raw-game.com/zrm/payload.bin",
+      "local_path": "payload.bin",
+      "mime_type": "application/octet-stream",
+      "status_code": 200,
+      "size": 290016,
+      "cache_entry_type": 4
+    },
+    {
+      "url": "https://raw-game.com/zrm/ps4_offsets.js",
+      "local_path": "ps4_offsets.js",
+      "mime_type": "text/javascript",
+      "status_code": 200,
+      "size": 17527,
+      "cache_entry_type": 4
+    },
+    {
+      "url": "https://raw-game.com/zrm/rpc_worker.js",
+      "local_path": "rpc_worker.js",
+      "mime_type": "text/javascript",
+      "status_code": 200,
+      "size": 5395,
+      "cache_entry_type": 4
+    },
+    {
+      "url": "https://raw-game.com/zrm/run_lapse.html",
+      "local_path": "run_lapse.html",
+      "mime_type": "text/html",
+      "status_code": 200,
+      "size": 1347,
+      "cache_entry_type": 20
+    },
+    {
+      "url": "https://raw-game.com/zrm/run_poops.html",
+      "local_path": "run_poops.html",
+      "mime_type": "text/html",
+      "status_code": 200,
+      "size": 1347,
+      "cache_entry_type": 20
+    }
+  ]
+}
