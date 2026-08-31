@@ -1,3 +1,4 @@
+
 # PS4 11.50 - 13.00 WebKit Exploit
 
 ### **You can run this project on your PS4 from our website at [zrm.mariope.dev](zrm.mariope.dev)**
@@ -30,6 +31,11 @@ The project combines firmware-specific offsets, JavaScript exploitation chains, 
 - Configurable runtime parameters through URL query options.
 - Lightweight browser UI with status and diagnostic output.
 
+## TODO
+
+ - [x] Cats in Poops chain 
+ - [ ] Cats in Lapse chain (disabled due to a bug temporarilly)
+
 ## Troubleshooting
 
 Most issues are usually solved by deleting Cookies and Website from your PlayStation, also, cat images will probably require Internet Access since those are not loaded into cache because there are 110 images and I'm not sure how unstable would it make this!
@@ -47,6 +53,8 @@ The launcher currently routes firmware versions as follows:
 | 12.50 | `poops` |
 | 12.52 | `poops` |
 | 13.00 | `poops` |
+
+Theorically 11.00 could work since there are offsets for it
 
 ## Project Structure
 
