@@ -2,33 +2,10 @@ import { establishPrimitive } from "./core.js";
 import { installWindowP } from "./mem.js";
 import { int64 } from "./int64.js";
 import { offsetsFor } from "./ps4_offsets.js";
-import { random } from "core-js/core/number";
 
 const outEl = document.getElementById("out");
 const stateEl = document.getElementById("state");
 const lines = [];
-
-function randomNeko(jelbreksolution) {
-    const overlay = document.getElementById("cat-fullscreen-overlay");
-    const img = document.getElementById("cat-random-img");
-
-    let folder = "";
-    let sillycars = 0;
-
-    if (jelbreksolution === "jelbreksusec") {
-        folder = "susec";
-        sillycars = 50;
-    } else if (jelbreksolution === "jelbrekfeil") {
-        folder = "feil";
-        sillycars = 60;
-    }
-
-    if (sillycars > 0) {
-        const num = Math.floor(Math.random() * sillycars) + 1;
-        img.src = `${folder}/${num}.jpg`;
-        overlay.style.display = "flex";
-    }
-}
 
 function post(tag, detail) {
     try {
@@ -3606,7 +3583,6 @@ function makeRpc(worker) {
         mark("STEP4D-FAILED", (e && e.message) ? e.message : String(e));
         mark("PROOF-SUMMARY", "pass=" + passCount + " fail=" + failCount);
         state("FAILED -- see log", "bad");
-        randomNeko("jelbrekfeil")
     } finally {
 
         const teardown = !committed || repaired;
@@ -3835,7 +3811,6 @@ function makeRpc(worker) {
                     : jailbroken ? "ROOT -- NO REBOOT NEEDED"
                     : "REPAIRED -- NO REBOOT NEEDED";
                 stateEl.className = "ok";
-                randomNeko("jelbreksusec");
             } catch (e) { }
         }
     }
