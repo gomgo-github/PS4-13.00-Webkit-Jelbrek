@@ -34,7 +34,7 @@ The project combines firmware-specific offsets, JavaScript exploitation chains, 
 ## TODO
 
  - [x] Cats in Poops chain 
- - [ ] Cats in Lapse chain (disabled due to a bug temporarilly)
+ - [x] Cats in Lapse chain
 
 ## Troubleshooting
 
