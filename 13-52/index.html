@@ -3,8 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="PS4 Liberation tool from 12.00 up to 13.00 WebKit that loads into cache and requires no PC, based on Poops and Lapse to load GoldHen on your PS4 straight up with a 97% of success ratio">
-<title>PS4 jelbrek 12.00 - 13.00</title>
+<title>PS4 jelbrek 13.52</title>
 <style>
   html, body { margin:0; padding:0; background:#0b0d10; color:#c8ced8;
                font:15px/1.45 "Segoe UI", system-ui, sans-serif; }
@@ -21,35 +20,14 @@
                vertical-align:middle; }
   #brand b { font-size:15px; font-weight:700; letter-spacing:.14em;
              color:#e6ebf2; vertical-align:middle; }
-  #cat-fullscreen-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #000;
-    z-index: 999999;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #cat-fullscreen-overlay img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
 </style>
 </head>
 <body>
-<div id="brand"><img src="logo_raw.png" alt="" width="28" height="28"><b>PS4 12.00 - 13.00 JELBREK RAW GAME</b></div>
+<div id="brand"><img src="../logo_raw.png" alt="" width="28" height="28"><b>PS4 13.02 - 13.52 JELBREK by RAW GAME</b></div>
 <div id="wrap">
   <div id="state">detecting firmware...</div>
   <div id="det"></div>
   <div id="cache"></div>
-</div>
-<div id="cat-fullscreen-overlay">
-  <img id="cat-random-img" src="" alt="result">
 </div>
 
 <script>
@@ -61,39 +39,30 @@
     function setCache(t, ok) { cacheEl.textContent = t; cacheEl.className = ok ? "cacheok" : ""; }
     var params = new URLSearchParams(location.search);
 
+    // Firmwares this build has a MEASURED kernel table for. jb.js still runs its
+    // own kernel-table-present gate, so this is UX only -- an unlisted firmware
+    // can still be launched with a tap. KEEP IN SYNC with ps4_offsets.js: add a
+    // fwnum here in the SAME commit that fills that firmware's kernel RVAs.
+    // The PS4 reports its minor as two hex digits in the UA (13.52 -> minor 0x52).
+    var SUPPORTED = { 1302: 1, 1304: 1, 1350: 1, 1352: 1 }; // all measured on hardware
+
     var key = null, fwnum = null;
     var m = /PlayStation\s+4[\/ ](\d+)\.(\d+)/.exec(navigator.userAgent);
     if (m) {
-        var minor = parseInt(m[2], 16);
-        var ms = minor.toString(16);
+        var ms = parseInt(m[2], 16).toString(16);
         if (ms.length < 2) ms = "0" + ms;
         key = m[1] + "." + ms;
         fwnum = parseInt(m[1], 10) * 100 + parseInt(ms, 10);
     }
-    var bug = null, why = "";
-    var forced = params.get("bug");
-    if (forced === "lapse" || forced === "poops") {
-        bug = forced; why = "forced via ?bug=" + forced;
-    } else if (!key) {
-        why = "user-agent is not a PlayStation 4";
-    } else if (fwnum == 1302 || fwnum == 1304 || fwnum == 1350 || fwnum == 1352){
-        location.replace("13-52/index.html");
-    } else if (fwnum <= 1202) {
-        bug = "lapse"; why = key + " <= 12.02";
-    } else if (fwnum >= 1250) {
-        bug = "poops"; why = key + " >= 12.50";
-    }else {
-        why = key + " -- no working bug (lapse ends at 12.02, poops needs 12.50)";
-    }
+
+    var forced = params.get("force") === "1";
+    var supported = forced || (fwnum !== null && SUPPORTED[fwnum] === 1);
     detEl.innerHTML = "firmware <b>" + (key || "unknown") + "</b>"
-        + " &middot; bug <b>" + (bug || "none") + "</b> &middot; " + why;
+        + (supported ? " &middot; <b>supported</b>"
+                     : " &middot; not in this build's kernel table");
 
-    if (!bug) { setState("UNSUPPORTED FIRMWARE", "bad"); return; }
-
-    var target = (bug === "lapse" ? "run_lapse.html" : "run_poops.html")
-        + location.search;
-    function go() { setState("loading " + bug + " chain...", "warn");
-                    location.replace(target); }
+    var target = "jb.html" + location.search;
+    function go() { setState("loading jailbreak...", "warn"); location.replace(target); }
 
     function waitForTap(msg, action) {
         setState(msg, "warn");
@@ -104,6 +73,14 @@
         }
         window.addEventListener("click", fire);
         window.addEventListener("keydown", fire);
+    }
+
+    // Off-target consoles are not launched automatically -- one tap still runs
+    // it, so a user-agent quirk on the real 13.52 console can never lock it out.
+    if (!supported) {
+        setState("UNSUPPORTED FIRMWARE", "bad");
+        waitForTap("UNSUPPORTED (" + (key || "unknown") + ") -- press X or tap to run anyway", go);
+        return;
     }
 
     var ac = window.applicationCache;
@@ -128,7 +105,6 @@
             if (e && e.total)
                 setCache("caching " + Math.round((e.loaded / e.total) * 100) + "%");
         }, false);
-
         ac.addEventListener("cached", function () {
             setCache("cached for offline use", true);
             waitForTap("CACHED (first run) -- press X or tap to run", go);
@@ -139,7 +115,6 @@
             waitForTap("UPDATE READY -- press X or tap to reload & run",
                        function () { location.reload(); });
         }, false);
-
         ac.addEventListener("noupdate", function () {
             setCache("cached -- offline ready", true);
             go();
