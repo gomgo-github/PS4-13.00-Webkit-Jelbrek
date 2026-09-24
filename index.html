@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="PS4 Liberation tool from 12.00 up to 13.00 WebKit that loads into cache and requires no PC, based on Poops and Lapse to load GoldHen on your PS4 straight up with a 97% of success ratio">
-<title>PS4 jelbrek 12.00 - 13.00</title>
+<title>PS4 jelbrek 12.00 - 13.52</title>
 <style>
   html, body { margin:0; padding:0; background:#0b0d10; color:#c8ced8;
                font:15px/1.45 "Segoe UI", system-ui, sans-serif; }
@@ -42,7 +42,7 @@
 </style>
 </head>
 <body>
-<div id="brand"><img src="logo_raw.png" alt="" width="28" height="28"><b>PS4 12.00 - 13.00 JELBREK RAW GAME</b></div>
+<div id="brand"><img src="logo_raw.png" alt="" width="28" height="28"><b>PS4 12.00 - 13.52 JELBREK RAW GAME</b></div>
 <div id="wrap">
   <div id="state">detecting firmware...</div>
   <div id="det"></div>
@@ -72,7 +72,7 @@
     }
     var bug = null, why = "";
     var forced = params.get("bug");
-    if (forced === "lapse" || forced === "poops") {
+    if (forced === "lapse" || forced === "poops" || forced === "jbjs") {
         bug = forced; why = "forced via ?bug=" + forced;
     } else if (!key) {
         why = "user-agent is not a PlayStation 4";
@@ -90,8 +90,9 @@
 
     if (!bug) { setState("UNSUPPORTED FIRMWARE", "bad"); return; }
 
-    var target = (bug === "lapse" ? "run_lapse.html" : "run_poops.html")
-        + location.search;
+    if (bug === "lapse"){ var target = "run_lapse.html" + location.search; } else if (bug === "poops") { var target = "run_poops.html" + location.search; } else if (bug === "jbjs") { var target = "13-52/jb.html" + location.search; }
+    /*var target = (bug === "lapse" ? "run_lapse.html" : "run_poops.html")
+        + location.search;*/
     function go() { setState("loading " + bug + " chain...", "warn");
                     location.replace(target); }
 
